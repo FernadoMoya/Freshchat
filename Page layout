@@ -1,0 +1,87 @@
+<div class="jPanelMenu-panel">
+	<div class="tab-panel hide" id="menu">
+		{% for tab in portal.tabs %}
+		    {% if tab.url %}
+		      <a class="{% if tab.tab_type == portal.current_tab %}active{% endif %}" href="{{tab.url}}">
+		          {{ tab.label }} 
+		      </a>
+		    {% endif %}
+		{% endfor %}
+		{% if portal.can_submit_ticket_without_login %}
+			 <a href="{{ portal.new_ticket_url }}">{% translate portal.new_ticket %}</a>
+		{% endif %}
+		{% if portal.has_user_signed_in == true %}
+			 <a href="{{ portal.profile_url }}">{% translate portal.edit_profile %}</a>
+	         <a href="{{ portal.logout_url }}">{% translate portal.sign_out %}</a>
+		{% else %}
+			<a href="{{ portal.login_url }}">{% translate portal.login %}</a>
+		{% endif%}
+	</div>
+
+	<div class="layout-panel">
+	{{ header }}
+	<div class="page page-layout" id="new-layout">
+		<!-- Notification Messages  -->
+		{{ page_message }}
+		
+		 <!-- Search and page links for the page -->
+		  {% if portal.search_allowed? %}
+		  <section class="help-center rounded-6">
+		    <div class="hc-search">
+		      <div class="hc-search-c">
+		        {% snippet search_form_new %}
+		      </div>
+		    </div>
+		  </section>
+		  {% endif %}
+
+		<div class="c-wrapper">		
+			{{ content_for_layout }}
+		</div>
+		{{ footer }}
+	</div>
+	</div>
+</div>
+<script>
+  window.fcSettings = {
+    token: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    host: "https://wchat.freshchat.com",
+    onInit: function() {
+      if (typeof(ga) === "function") {
+        ga('create', 'UA-xxxxxxxx-x', 'auto', 'FreshchatEvents');
+        window.fcWidget.on("widget:loaded", function(resp) {
+          window.fcWidget.on("widget:opened", function(resp) {
+            ga('FreshchatEvents.send', 'event', 'Freshchat widget', 'GadgetGod', 'Widget Open');
+          });
+          window.fcWidget.on("widget:closed", function(resp) {
+            ga('FreshchatEvents.send', 'event', 'Freshchat widget', 'GadgetGod', 'Widget Close');
+          });
+          window.fcWidget.on('message:received', function(resp) {
+            ga('FreshchatEvents.send', 'event', 'Freshchat widget', 'GadgetGod', 'Received');
+          });
+          window.fcWidget.on('message:sent', function(resp) {
+            ga('FreshchatEvents.send', 'event', 'Freshchat widget', 'GadgetGod', 'Sent');
+          });
+          window.fcWidget.on('user:statechange', function(resp) {
+            if (resp && resp.data && resp.data.userState === "created") {
+              ga('FreshchatEvents.send', 'event', 'Freshchat widget', 'GadgetGod', 'User Create');
+            }
+            if (resp && resp.data && resp.data.userState === "loaded") {
+              ga('FreshchatEvents.send', 'event', 'Freshchat widget', 'GadgetGod', 'User Loaded');
+            }
+            if (resp && resp.data && resp.data.userState === "identified") {
+              ga('FreshchatEvents.send', 'event', 'Freshchat widget', 'GadgetGod', 'User Identified');
+            }
+            if (resp && resp.data && resp.data.userState === "restored") {
+              ga('FreshchatEvents.send', 'event', 'Freshchat widget', 'GadgetGod', 'User Restored');
+            }
+          });
+        });
+      }
+      else {
+        console.log('Google Analytics not loaded');
+      }
+    }
+  };
+</script>
+<script src="https://wchat.freshchat.com/js/widget.js" async></script>
