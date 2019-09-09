@@ -1,0 +1,23 @@
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-xxxxxxxx-x"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-xxxxxxxx-x');
+</script>
+<script src="https://wchat.freshchat.com/js/widget.js"></script>
+<!-- Title for the page -->
+<title> {{ meta.title }} : {{ portal.name }} </title>
+
+<!-- Meta information -->
+{{ meta | default_meta }}
+
+<!-- Responsive setting -->
+{{ portal | default_responsive_settings }}
+
+<!-- Stop search engine crawling -->
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+<META NAME="ROBOTS" CONTENT="NOFOLLOW">
+
