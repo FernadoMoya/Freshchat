@@ -1,0 +1,38 @@
+<footer id="new-footer" class="footer">
+  <footer id="new-footer" class="footer">
+	<div class="clearfix">
+		{{ portal | link_to_privacy_policy_new }}
+		{{ portal | link_to_cookie_law_new}}
+		{{ portal | portal_copyright_new }}
+	</div>
+
+	{%unless portal.portal_phone == blank%}
+		<div class="show-in-mobile mob-phone">
+			<a href="tel:{{ portal.portal_phone }}">
+				<i class="icon-phone"></i>
+				{{ portal.portal_phone }}
+			</a>
+		</div>
+	{%endunless%}
+</footer>
+<script>
+window.fcWidget.init({
+token: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+host: "https://wchat.freshchat.com"
+});
+</script>
+	<div class="clearfix">
+		{{ portal | link_to_privacy_policy_new }}
+		{{ portal | link_to_cookie_law_new}}
+		{{ portal | portal_copyright_new }}
+	</div>
+
+	{%unless portal.portal_phone == blank%}
+		<div class="show-in-mobile mob-phone">
+			<a href="tel:{{ portal.portal_phone }}">
+				<i class="icon-phone"></i>
+				{{ portal.portal_phone }}
+			</a>
+		</div>
+	{%endunless%}
+</footer>
